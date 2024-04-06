@@ -1,31 +1,41 @@
 ﻿
+using Microsoft.AspNetCore.Http.HttpResults;
+
 namespace Trips.Data
 {
     public class TripService : ITripService
     {
         public void AddTrip(Trip trip)
         {
-            throw new NotImplementedException();
+            Data.Trips.Add(trip);
         }
 
         public void DeleteTrip(int tripId)
         {
-            throw new NotImplementedException();
+            var trip = Data.Trips.FirstOrDefault(n => n.Id == tripId);
+            if (trip != null)
+            {
+                Data.Trips.Remove(trip);
+            }
         }
 
         public List<Trip> GetAllTrips()
         {
-            throw new NotImplementedException();
+            return Data.Trips.ToList();
         }
 
-        public Trip GetTripById(int tripId)
-        {
-            throw new NotImplementedException();
-        }
+        public Trip GetTripById(int tripId) => Data.Trips.FirstOrDefault(n => n.Id == tripId);
 
         public void UpdateTrip(int tripId, Trip trip)
         {
-            throw new NotImplementedException();
+            var oldTrip = Data.Trips.FirstOrDefault(n => n.Id == tripId);
+            if (oldTrip != null)
+            {
+                oldTrip.Name = trip.Name;
+                oldTrip.Description = trip.Description;
+                oldTrip.DateStarted = trip.DateStarted;
+                oldTrip.DateCompleted = trip.DateCompleted;
+            }
         }
     }
 }
