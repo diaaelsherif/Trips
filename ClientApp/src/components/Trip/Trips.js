@@ -20,7 +20,7 @@ export default class Trips extends Component {
 			this.setState({ trips: result.data, loading: false });
 		}).catch(function (error) {
 			if (error.response) {
-				alert(error.response.data + ', ' + error.response.status + ', ' + error.response.headers);
+				alert('Error Code:' + error.response.status + '\n\nError Data:\n' + error.response.data + '\n\nError Headers:\n' + error.response.headers);
 			}
 		});
 	}
