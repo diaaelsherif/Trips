@@ -1,0 +1,6 @@
+@Trips.Server_HostAddress = http://localhost:5181
+
+GET {{Trips.Server_HostAddress}}/api/Trips/GetTrips
+Accept: application/json
+
+###
