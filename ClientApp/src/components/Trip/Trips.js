@@ -19,7 +19,9 @@ export class Trips extends Component
     populateTripsData() {
         axios.get("api/Trips/GetTrips").then(result => {
             const response = result.data;
-            this.setState({ trips: response, loading: false });
+            if (response.constructor == Array) {
+                this.setState({ trips: response, loading: false });
+            }
         });
     }
 

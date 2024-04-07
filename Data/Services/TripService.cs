@@ -24,7 +24,11 @@ namespace Trips.Data
             return Data.Trips.ToList();
         }
 
-        public Trip GetTripById(int tripId) => Data.Trips.FirstOrDefault(n => n.Id == tripId);
+        public Trip GetTripById(int tripId)
+        {
+            var trip = Data.Trips.FirstOrDefault(n => n.Id == tripId) ?? Data.Trips.FirstOrDefault(n => n.Id == 0) ?? new Trip() {Id=0, DateStarted=DateTime.MinValue};
+            return trip;
+        }
 
         public void UpdateTrip(int tripId, Trip trip)
         {
