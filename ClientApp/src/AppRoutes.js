@@ -1,4 +1,4 @@
-import { Trips } from "./components/Trip/Trips"
+import Trips from "./components/Trip/Trips";
 
 const AppRoutes = [
 	{
