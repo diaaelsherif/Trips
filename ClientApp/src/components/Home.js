@@ -1,4 +1,4 @@
-﻿import React, { Component } from 'react';
+import React, { Component } from 'react';
 
 export default class Home extends Component {
 	render() {
@@ -11,7 +11,7 @@ export default class Home extends Component {
 					<li>Update a trip</li>
 					<li>Delete a trip</li>
 					<li>Show all trips</li>
-				</ul>
+				</ul>				
 			</div>
 		);
 	}
