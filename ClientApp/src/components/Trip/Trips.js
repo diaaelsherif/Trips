@@ -7,6 +7,7 @@ class Trips extends Component {
 		super(props)
 
 		this.onTripUpdate = this.onTripUpdate.bind(this);
+		this.onTripDelete = this.onTripDelete.bind(this);
 
 		this.state = {
 			trips: [],
@@ -21,6 +22,11 @@ class Trips extends Component {
 	onTripUpdate(id) {
 		const { navigate } = this.props.router;
 		navigate('/update/' + id);
+	}
+
+	onTripDelete(id) {
+		const { navigate } = this.props.router;
+		navigate('/delete/' + id);
 	}
 
 	populateTripsData() {
@@ -59,6 +65,9 @@ class Trips extends Component {
 											<button onClick={() => this.onTripUpdate(trip.id)} className="btn btn-success">
 												Update
 											</button>
+											<button onClick={() => this.onTripDelete(trip.id)} className="btn btn-danger">
+                                        		Delete
+                                    		</button>
 										</div>
 									</td>
 								</tr>
