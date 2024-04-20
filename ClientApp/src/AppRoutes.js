@@ -1,6 +1,7 @@
 import Home from "./components/Home";
-import Create from "./components/Trip/Create";
 import Trips from "./components/Trip/Trips";
+import Create from "./components/Trip/Create";
+import Update from "./components/Trip/Update";
 
 const AppRoutes = [
 	{
@@ -14,6 +15,10 @@ const AppRoutes = [
 	{
 		path: '/create',
 		element: <Create />
+	},
+	{
+		path: '/update/:id',
+		element: <Update />
 	}
 ];
 
