@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import { getAllTrips } from '../../actions/tripActions';
 import { withRouter } from '../withRouter'
 
 class Trips extends Component {
@@ -16,7 +17,13 @@ class Trips extends Component {
 	}
 
 	componentDidMount() {
-		this.populateTripsData();
+		this.props.getAllTrips();
+	}
+
+	componentDidUpdate(prevProps) {
+		if(prevProps.trips.data !== this.props.trips.data){
+			this.setState({trips: this.props.trips.data});
+		}
 	}
 
 	onTripUpdate(id) {
@@ -27,16 +34,6 @@ class Trips extends Component {
 	onTripDelete(id) {
 		const { navigate } = this.props.router;
 		navigate('/delete/' + id);
-	}
-
-	populateTripsData() {
-		axios.get("api/Trips/GetTrips").then(result => {
-			this.setState({ trips: result.data, loading: false });
-		}).catch(function (error) {
-			if (error.response) {
-				alert('Error Code:' + error.response.status + '\n\nError Data:\n' + error.response.data + '\n\nError Headers:\n' + error.response.headers);
-			}
-		});
 	}
 
 	renderAllTripsTable(trips) {
@@ -80,13 +77,14 @@ class Trips extends Component {
 
 	render() {
 
-		let content = this.state.loading ? (
-			<p>
+		let content = this.props.trips.loading ? 
+        (
+            <p>
 				<em>Loading...</em>
-			</p>
-		) : (
-			this.renderAllTripsTable(this.state.trips)
-		)
+            </p>
+        ) : (
+            this.state.trips.length && this.renderAllTripsTable(this.state.trips)
+        );
 
 		return (
 			<div>
@@ -97,4 +95,9 @@ class Trips extends Component {
 		);
 	}
 }
-export default withRouter(Trips);
+
+const mapStateToProps = ({trips}) => ({
+    trips
+});
+
+export default connect(mapStateToProps, {getAllTrips})(withRouter(Trips));
